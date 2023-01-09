@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+# Credits:
+# Jesse Archer
+# https://github.com/jessarcher/blob/master/install
+
+# Retrieve Dotfiles directory
+DOTFILES="$( cd "$( dirname "$0" )" && pwd )"
+
+# Create scripts folder if not present
+mkdir -p $HOME/.local/bin
+
+# Tmux
+ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+ln -sf $DOTFILES/scripts/t $HOME/.local/bin/t
+
+# WezTerm
+rm -rf $HOME/.config/wezterm
+ln -s $DOTFILES/wezterm $HOME/.config/wezterm
+
+# Nvim
+rm -rf $HOME/.config/nvim
+ln -s $DOTFILES/nvim $HOME/.config/nvim
+
