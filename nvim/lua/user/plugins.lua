@@ -75,6 +75,13 @@ use('wbthomason/packer.nvim')
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+-- Floating terminal
+use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+  require("toggleterm").setup{
+  direction='float'
+  }
+end}
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
