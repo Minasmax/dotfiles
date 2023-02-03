@@ -58,24 +58,42 @@ use { -- Additional text objects via treesitter
   after = 'nvim-treesitter',
 }
 
+use{ -- File tree sidebar
+  'kyazdani42/nvim-tree.lua',
+  requires = 'kyazdani42/nvim-web-devicons',
+  config = function()
+    require('user/plugins/nvim-tree')
+  end,
+}
 -- Git related plugins
 use 'tpope/vim-fugitive'
 use 'tpope/vim-rhubarb'
 use 'lewis6991/gitsigns.nvim'
 
+-- Small other plugins
 use 'navarasu/onedark.nvim' -- Theme inspired by Atom
 use 'nvim-lualine/lualine.nvim' -- Fancier statusline
 use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
 use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
-use('tpope/vim-surround') -- Add, change, and delete surrounding text.
-use('tpope/vim-unimpaired')-- Pairs of handy bracket mappings, like [b and ]b.
-use('tpope/vim-commentary') -- Commenting support
-use('tpope/vim-sleuth') -- Indent autodetection with editorconfig support.
-use('jessarcher/vim-heritage') -- Create files in non existing folders
+use 'tpope/vim-surround' -- Add, change, and delete surrounding text.
+use 'tpope/vim-unimpaired'-- Pairs of handy bracket mappings, like [b and ]b.
+use 'tpope/vim-commentary' -- Commenting support
+use 'tpope/vim-sleuth' -- Indent autodetection with editorconfig support.
+use 'jessarcher/vim-heritage' -- Create files in non existing folders
 
 -- Fuzzy Finder (files, lsp, etc)
-use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+use({
+  'nvim-telescope/telescope.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'kyazdani42/nvim-web-devicons',
+    'nvim-telescope/telescope-live-grep-args.nvim',
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+  },
+  config = function()
+    require('user/plugins/telescope')
+  end,
+})
 
 -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
