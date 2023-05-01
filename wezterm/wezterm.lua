@@ -1,15 +1,19 @@
-local wezterm = require 'wezterm'
-local mux = wezterm.mux
+local wezterm = require("wezterm")
 
-wezterm.on("gui-startup", function()
-  local tab, pane, window = mux.spawn_window{}
-  window:gui_window():maximize()
-end)
+-- This table will hold the configuration.
+local config = {}
 
-return {
- font_size = 14.0,
- line_height = 1.25,
- color_scheme = "One dark (base16)",
- enable_tab_bar = false,
- audible_bell = "Disabled",
-}
+-- In newer versions of wezterm, use the config_builder which will
+-- help provide clearer error messages
+if wezterm.config_builder then
+	config = wezterm.config_builder()
+end
+
+config.font = wezterm.font("Hack Nerd Font Mono")
+config.font_size = 14.0
+config.line_height = 1.25
+config.color_scheme = "tokyonight_night"
+config.enable_tab_bar = false
+config.audible_bell = "Disabled"
+
+return config
